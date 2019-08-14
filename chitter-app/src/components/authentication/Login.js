@@ -26,8 +26,10 @@ class Login extends React.Component {
       )
       .then(res => {
         console.log("log in success")
+        sessionStorage.setItem('handle', this.state.handle)
         sessionStorage.setItem('user_id', res.data.user_id)
         sessionStorage.setItem('session_key', res.data.session_key)
+        sessionStorage.setItem('logged_in_status', true)
       })
   }
 

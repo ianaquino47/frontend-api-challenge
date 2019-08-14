@@ -13,7 +13,8 @@ import './App.css';
 class App extends Component {
   state = {
     peeps: [],
-    logged_in_status: false,
+    handle: sessionStorage.getItem('handle'),
+    logged_in_status: sessionStorage.getItem('user_id'),
     user_id: sessionStorage.getItem('user_id'),
     session_key: sessionStorage.getItem('session_key')
   }
@@ -27,7 +28,7 @@ class App extends Component {
 
 
   delPeep = (id) => {
-    axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`,
+    axios.delete(`https://chitter-backend-api.herokuapp.com/peeps/${id}`,
     {headers: {
       "Authorization": `Token token=${this.state.session_key}`
     }}
@@ -50,12 +51,12 @@ class App extends Component {
   }
 
   render() {
-    // let registration = null
-    // if (this.state.logged_in_status) {
-    //   registration = <div>Logout</div>
-    // } else {
-    //   registration = <Registration/>
-    // }
+    let registration = null
+    if (this.state.logged_in_status) {
+      registration = <div>Hi, {this.state.handle}!</div>
+    } else {
+      registration = <Login/>
+    }
     return (
       <Router>
         <div className="App">
@@ -63,7 +64,7 @@ class App extends Component {
             <Header/>
             <Route exact path="/" render={props => (
                <React.Fragment>
-                 <Login />
+                 {registration}
                  <AddPeep addPeep= {this.addPeep}/>
                  <Peeps peeps={this.state.peeps} delPeep={this.delPeep}/>
                </React.Fragment>
