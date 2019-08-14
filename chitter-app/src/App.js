@@ -54,6 +54,7 @@ class App extends Component {
     let registration = null
     if (this.state.logged_in_status) {
       registration = <div>Hi, {this.state.handle}!</div>
+
     } else {
       registration = <Login/>
     }

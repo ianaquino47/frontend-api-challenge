@@ -5,7 +5,14 @@ function Header() {
   return (
     <header style={headerStyle}>
       <h1>Chitter</h1>
-      <Link style={linkStyle} to="/">Home</Link> | <Link style={linkStyle} to="/about">About</Link>
+      <Link style={linkStyle} to="/"> Home </Link>
+      |
+      <Link style={linkStyle} to="/about"> About </Link>
+      |
+      <Link
+        style={linkStyle} to="/">
+        <span onClick={sessionStorage.clear()}> Logout </span>
+      </Link>
     </header>
   )
 }
